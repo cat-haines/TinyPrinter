@@ -5,7 +5,7 @@ allowAuth <- false;
 OAuth <- {};
 
 // Twitter
-_CONSUMER_KEY <- "";
+_CONSUMER_KEY <- ""
 _CONSUMER_SECRET <- "";
 
 // HTTP
@@ -61,7 +61,7 @@ const PAGE_TEMPLATE = @"
             <p>Powered by <a href='http://electricimp.com'>Electric Imp</a>.</p>
           </footer>
         </div>
-      
+        
         <!-- jQuery -->
         <script src='https://code.jquery.com/jquery-1.9.1.min.js'></script>
         <script src='https://code.jquery.com/jquery-migrate-1.2.1.min.js'></script>
@@ -79,7 +79,7 @@ const PAGE_TEMPLATE = @"
                 }
             }
 
-            function logError(title, message, autoclear) {
+            function (title, message, autoclear) {
                 autoclear = autoclear || true;
                 var t = new Date().getTime();
                 $('#messages').prepend('<div id =\'' + t + '\'class=\'alert alert-error\'><button type=\'button\' class=\'close\' data-dismiss=\'alert\'>x</button><strong>' + title + '</strong>&nbsp;' + message + '</div>');
@@ -108,7 +108,7 @@ const PAGE_TEMPLATE = @"
                                 $('#body').html(response);
                             },
                             error: function (request, status, error) {
-                                logError('Whoops!', request.responseText);
+                                logError('Whoops!', 'Looks like someone is already logged into this printer. To enable a new user to login, power cycle the device and try logging in within 1 minute of the device coming online', false);
                             }
                         });
                     }
@@ -128,7 +128,7 @@ const PAGE_TEMPLATE = @"
                         $('#body').html(response);
                     },
                     error: function (request, status, error) {
-                        logError('Whoops!', 'Looks like someone is already logged into this printer. To enable a new user to login, power cycle the device and try logging in within 1 minute of the device coming online');
+                        logError('Whoops!', 'Looks like someone is already logged into this printer. To enable a new user to login, power cycle the device and try logging in within 1 minute of the device coming online', false);
                     }
                 });
             }
@@ -143,7 +143,7 @@ const PAGE_TEMPLATE = @"
                         logSuccess('Success!', 'Your [Tiny]Printer has been updated.', false)
                     },
                     error: function (request, status, error) {
-                        logError('Whoops!', request.responseText);
+                        logError('Whoops!', request.responseText, false);
                     }
                 });
 

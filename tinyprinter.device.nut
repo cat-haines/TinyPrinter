@@ -1,23 +1,14 @@
+
+const LINE_LENGTH = 32;
+
+bootMessage <- "--------------------------------\r\n"
+bootMessage += "--- Electric Imp TinyPrinter ---\r\n"
+bootMessage += "--------------------------------\r\n"
+bootMessage += "\r\n\r\n";
+
 // Hardware Configuration
 local serial = hardware.uart57;
 serial.configure(19200, 8, PARITY_NONE, 1, NO_CTSRTS);
-
-function writeLine(n = 1) {
-    for(local i = 0; i < n; i++) {
-        serial.write('\r')
-        serial.write('\n')
-    }
-}
-function writeString(a) {
-    foreach(c in a) {
-        serial.write(c);
-    }
-}
-
-function printInfo(info) {
-    writeString(info);
-    writeLine(4);
-}
 
 function prepText(text) {
     local newLine = "\r\n"
@@ -38,8 +29,12 @@ function prepText(text) {
                 lineLength = part.len() + 1;
             }
         } else {
-            textToPrint += part + " ";
-            lineLength += part.len() + 1;
+            textToPrint += part;
+            lineLength += part.len();
+            if (lineLength < 32) {
+                textToPrint += " ";
+                lineLength++;
+            }
         }
     }
     textToPrint += "\r\n";
@@ -47,28 +42,13 @@ function prepText(text) {
     return textToPrint;
 }
 
-const LINE_LENGTH = 32;
-
-bootMessage <- "--------------------------------\r\n"
-bootMessage += "--- Electric Imp TinyPrinter ---\r\n"
-bootMessage += "--------------------------------\r\n"
-bootMessage += "\r\n\r\n";
-
-// Hardware Configuration
-local serial = hardware.uart57;
-serial.configure(19200, 8, PARITY_NONE, 1, NO_CTSRTS);
-
-function writeString(a) {
-    foreach(c in a) {
-        serial.write(c);
-    }
+function writeLine(n = 1) {
+    for(local i = 0; i < n; i++) serial.write("\r\n")
 }
 
-function writeLine(n = 1) {
-    for(local i = 0; i < n; i++) {
-        serial.write('\r')
-        serial.write('\n')
-    }
+function printInfo(info) {
+    serial.write(prepText(info));
+    writeLine(4);
 }
 
 function printTweet(tweet) {
@@ -77,15 +57,10 @@ function printTweet(tweet) {
     local user = "- " + tweet.user;
     for (local i = user.len(); i < LINE_LENGTH; i++) user = " " + user;
     
-    writeString(text);
+    serial.write(text);
     writeLine();
-    writeString(user);
+    serial.write(user);
     writeLine(4)
-}
-
-function printInfo(info) {
-    writeString(prepText(info));
-    writeLine(4);
 }
 
 agent.on("tweet", printTweet);
@@ -93,4 +68,4 @@ agent.on("info", printInfo)
 
 imp.configure("Printer", [], []);
 agent.send("coldboot", null);
-writeString(bootMessage);
+serial.write(bootMessage);
