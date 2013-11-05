@@ -2,19 +2,16 @@
 [Tiny]Printer is an (Electric Imp powered) Internet-connected printer!
 
 ## Required Hardware:
-For this project, you are going to need the following:
 - [Electric Imp Card](http://www.adafruit.com/products/1129)
 - [April Breakout Board](http://www.adafruit.com/products/1130)
 - [Mini Thermal Receipt Printer Starter Pack](http://www.adafruit.com/products/600)
 
 ## Required Web Services:
-For this project, we are going to use the following services
 - [Electric Imp](https://ide.electricimp.com)
 - [OAuth.io](https://oauth.io)
 - [Twitter](https://dev.twitter.com/)
 
 ## Hardware Setup:
-The hardware on this project is dirt simple:
 - Follow the [Power](http://learn.adafruit.com/mini-thermal-receipt-printer/power) and [Microcontroller](http://learn.adafruit.com/mini-thermal-receipt-printer/microcontroller) steps in the [AdaFruit Guide](http://learn.adafruit.com/mini-thermal-receipt-printer).
   - Hook up the red wire from the DC power supply to the **Vin** pin on the April. 
   - Hook up the black wire from the DC power supply to one of the **GND** pins on the April.
@@ -43,6 +40,7 @@ The user's credentials and the current search term persist over device and agent
 
 ## Contact
 [Matt Haines](github.com/beardedinventor)
+
 [@beardedinventor](http://twitter.com/beardedinventor)
 
 ## License
