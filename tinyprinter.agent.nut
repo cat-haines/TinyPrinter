@@ -68,7 +68,7 @@ const PAGE_TEMPLATE = @"
         <!-- Latest compiled and minified JavaScript -->
         <script src='https://netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js'></script>
         <!-- Oauth.io -->
-        <script src='https://devious-dorris.gopagoda.com/assets/js/oauth.min.js'></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/oauth-io/0.9.0/oauth.js'></script>
         <script>
             function logSuccess(title, message, autoclear) {
                 autoclear = autoclear || true;
