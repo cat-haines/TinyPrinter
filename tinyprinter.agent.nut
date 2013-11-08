@@ -79,7 +79,7 @@ const PAGE_TEMPLATE = @"
                 }
             }
 
-            function (title, message, autoclear) {
+            function logError(title, message, autoclear) {
                 autoclear = autoclear || true;
                 var t = new Date().getTime();
                 $('#messages').prepend('<div id =\'' + t + '\'class=\'alert alert-error\'><button type=\'button\' class=\'close\' data-dismiss=\'alert\'>x</button><strong>' + title + '</strong>&nbsp;' + message + '</div>');
